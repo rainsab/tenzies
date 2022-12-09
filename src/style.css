@@ -9,6 +9,11 @@ body {
   font-family: 'Karla', sans-serif;
 }
 
+p {
+  font-weight: bold;
+  letter-spacing: 0.008em;
+}
+
 main {
   background-color: #F5F5F5;
   height: 95vh;

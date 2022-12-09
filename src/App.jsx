@@ -66,6 +66,7 @@ export default function App() {
 
     return (
         <main>
+            <p>Roll or hold by clicking on dice till you get all same</p>
             <div className="dice-container">
                 {diceElements}
             </div>
