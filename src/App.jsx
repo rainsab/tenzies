@@ -3,6 +3,8 @@ import { nanoid } from "nanoid"
 import Die from "./Die"
 
 export default function App() {
+    const [clicks, setClicks] = useState(0);
+
     const newDiceGrid = () => {
         const newDice = []
         for (let i = 0; i < 10; i++) {
@@ -39,11 +41,13 @@ export default function App() {
 
     const button = () => {
         if(!tenzies) {
+            setClicks(clicks + 1);
             setDice(oldDice => oldDice.map(die => {
                 return die.isHeld ? die : generateNewDie();
             }))
         } else {
             setTenzies(false);
+            setClicks(0);
             setDice(newDiceGrid());
         }
     }
@@ -65,6 +69,7 @@ export default function App() {
             <div className="dice-container">
                 {diceElements}
             </div>
+            <h1>Rolls counter: {clicks}</h1>
             <button className="roll-dice" onClick={button}>
                 {tenzies ? "New Game" : "Roll"}
             </button>

@@ -37,6 +37,7 @@ main {
   align-items: center;
   cursor: pointer;
   background-color: white;
+  padding: 1rem;
 }
 
 .die-number {
@@ -44,8 +45,8 @@ main {
 }
 
 .roll-dice {
-  height: 50px;
-  width: 100px;
+  width: 150px;
+  padding: 1rem;
   border: none;
   border-radius: 6px;
   background-color: #5035FF;
