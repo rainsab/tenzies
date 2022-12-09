@@ -4,6 +4,9 @@ import Die from "./Die"
 
 export default function App() {
     const [clicks, setClicks] = useState(0);
+    const [bestResult, setBestResult] = useState(
+        JSON.parse(localStorage.getItem("bestResult")) || "none"
+    )
 
     const newDiceGrid = () => {
         const newDice = []
@@ -26,9 +29,16 @@ export default function App() {
         const allSameValue = dice.every(die => die.value === dice[0].value);
 
         if (allHeld && allSameValue) {
+            if (clicks < bestResult || bestResult === "none") {
+                setBestResult(clicks);
+            }
             setTenzies(true);
         }
     }, [dice])
+
+    useEffect(() => {
+        localStorage.setItem("bestResult", JSON.stringify(bestResult));
+    }, [bestResult])
     
 
     const generateNewDie = () => {
@@ -74,6 +84,7 @@ export default function App() {
             <button className="roll-dice" onClick={button}>
                 {tenzies ? "New Game" : "Roll"}
             </button>
+            <h2>Best result: {bestResult}</h2>
         </main>
     )
 }
