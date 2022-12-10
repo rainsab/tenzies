@@ -34,11 +34,11 @@ export default function App() {
             }
             setTenzies(true);
         }
-    }, [dice])
+    }, [dice]);
 
     useEffect(() => {
         localStorage.setItem("bestResult", JSON.stringify(bestResult));
-    }, [bestResult])
+    }, [bestResult]);
 
     const generateNewDie = () => {
         return {
