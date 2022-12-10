@@ -46,8 +46,22 @@ export default function Stopwatch(props) {
                 <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}:</span>
                 <span>{("0" + ((time / 10) % 100)).slice(-2)}</span>
             </div>
-            <p>Last time: {lastTime}</p>
-            <p>Best time: {bestTime}</p>
+
+            <p>Last time: 
+                <span className="span-gap">
+                    <span>{("0" + Math.floor((lastTime / 60000) % 60)).slice(-2)}:</span>
+                    <span>{("0" + Math.floor((lastTime / 1000) % 60)).slice(-2)}:</span>
+                    <span>{("0" + ((lastTime / 10) % 100)).slice(-2)}</span>
+                </span>
+            </p>
+
+            <p>Best time:
+                 <span className="span-gap">
+                    <span>{("0" + Math.floor((bestTime / 60000) % 60)).slice(-2)}:</span>
+                    <span>{("0" + Math.floor((bestTime / 1000) % 60)).slice(-2)}:</span>
+                    <span>{("0" + ((bestTime / 10) % 100)).slice(-2)}</span>
+                </span>
+            </p>
         </div>
     )
 }

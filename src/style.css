@@ -71,3 +71,7 @@ main {
 .stopwatch-container {
   text-align: center;
 }
+
+.span-gap {
+  padding-left: 0.1875rem;
+}
