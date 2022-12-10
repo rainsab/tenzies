@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { nanoid } from "nanoid"
-import Die from "./Die"
+import React, { useState, useEffect } from 'react';
+import { nanoid } from "nanoid";
+import Die from "./Die";
+import Stopwatch from './Stopwatch';
 
 export default function App() {
     const [clicks, setClicks] = useState(0);
@@ -21,7 +22,6 @@ export default function App() {
     }
     
     const [dice, setDice] = useState(newDiceGrid());
-    
     const [tenzies, setTenzies] = useState(false);
 
     useEffect(() => {
@@ -39,7 +39,6 @@ export default function App() {
     useEffect(() => {
         localStorage.setItem("bestResult", JSON.stringify(bestResult));
     }, [bestResult])
-    
 
     const generateNewDie = () => {
         return {
@@ -81,6 +80,7 @@ export default function App() {
                 {diceElements}
             </div>
             <h1>Rolls counter: {clicks}</h1>
+            <Stopwatch tenzies={tenzies} />
             <button className="roll-dice" onClick={button}>
                 {tenzies ? "New Game" : "Roll"}
             </button>
