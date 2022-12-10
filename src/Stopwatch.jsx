@@ -6,7 +6,7 @@ export default function Stopwatch(props) {
     const [bestTime, setBestTime] = useState(
         JSON.parse(localStorage.getItem("bestTime")) || "none"
     )
-    
+    const [lastTime, setLastTime] = useState("none")
 
     useEffect(() => {
         if (props.tenzies === false) {
@@ -14,7 +14,6 @@ export default function Stopwatch(props) {
         } else if (props.tenzies === true) {
             setRunning(false);
             if (time < bestTime || bestTime === "none") {
-                console.log(time)
                 setBestTime(time);
             }
         } else {
@@ -27,9 +26,11 @@ export default function Stopwatch(props) {
         if (running) {
             interval = setInterval(() => {
                 setTime((prevTime) => prevTime + 10);
-            }, 10);
+            }, 10)
         } else if (!running) {
             clearInterval(interval);
+            setLastTime(time);
+            setTime(0);
         }
         return () => clearInterval(interval);
     }, [running]);
@@ -39,12 +40,13 @@ export default function Stopwatch(props) {
     }, [bestTime]);
 
     return (
-        <div>
+        <div className="stopwatch-container">
             <div className="stopwatch">
                 <span>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
                 <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}:</span>
                 <span>{("0" + ((time / 10) % 100)).slice(-2)}</span>
             </div>
+            <p>Last time: {lastTime}</p>
             <p>Best time: {bestTime}</p>
         </div>
     )
