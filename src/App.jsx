@@ -21,7 +21,19 @@ export default function App() {
         return newDice;
     }
     
-    const [dice, setDice] = useState(newDiceGrid());
+    const firstDice = () => {
+        const newDice = []
+        for (let i = 0; i < 10; i++) {
+            newDice.push({
+                value: 4,
+                isHeld: true,
+                id: nanoid()
+            })
+        }
+        return newDice;
+    }
+
+    const [dice, setDice] = useState(firstDice());
     const [tenzies, setTenzies] = useState(false);
 
     useEffect(() => {
@@ -29,7 +41,7 @@ export default function App() {
         const allSameValue = dice.every(die => die.value === dice[0].value);
 
         if (allHeld && allSameValue) {
-            if (clicks < bestResult || bestResult === "none") {
+            if ((bestResult === "none" || clicks < bestResult) && clicks > 0) {
                 setBestResult(clicks);
             }
             setTenzies(true);
