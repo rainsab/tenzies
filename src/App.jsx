@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { nanoid } from "nanoid";
 import Die from "./Die";
 import Stopwatch from './Stopwatch';
+import Roll from './Roll';
+import NewGame from './NewGame';
 
 export default function App() {
     const [clicks, setClicks] = useState(0);
@@ -20,7 +22,7 @@ export default function App() {
         }
         return newDice;
     }
-    
+
     const firstDice = () => {
         const newDice = []
         for (let i = 0; i < 10; i++) {
@@ -35,6 +37,15 @@ export default function App() {
 
     const [dice, setDice] = useState(firstDice());
     const [tenzies, setTenzies] = useState(false);
+    const [time, setTime] = useState(0);
+
+    const runTime = () => {
+        setTime((prevTime) => prevTime + 10);
+    }
+
+    const showTime = () => {
+        setTime(time);
+    }
 
     useEffect(() => {
         const allHeld = dice.every(die => die.isHeld);
@@ -61,7 +72,7 @@ export default function App() {
     }
 
     const button = () => {
-        if(!tenzies) {
+        if (!tenzies) {
             setClicks(clicks + 1);
             setDice(oldDice => oldDice.map(die => {
                 return die.isHeld ? die : generateNewDie();
@@ -70,17 +81,18 @@ export default function App() {
             setTenzies(false);
             setClicks(0);
             setDice(newDiceGrid());
+            setTime(0);
         }
     }
 
     const holdDice = (id) => {
         setDice(oldDice => oldDice.map(die => {
-            return die.id === id ? {...die, isHeld: !die.isHeld} : die
+            return die.id === id ? { ...die, isHeld: !die.isHeld } : die
         }))
     }
 
     const diceElements = dice.map(die => (
-        <Die 
+        <Die
             key={die.id} value={die.value} isHeld={die.isHeld} holdDice={() => holdDice(die.id)}
         />
     ))
@@ -92,10 +104,8 @@ export default function App() {
                 {diceElements}
             </div>
             <h1>Rolls counter: {clicks}</h1>
-            <Stopwatch tenzies={tenzies} dice={dice} />
-            <button className="roll-dice" onClick={button}>
-                {tenzies ? "New Game" : "Roll"}
-            </button>
+            <Stopwatch tenzies={tenzies} dice={dice} time={time} runTime={runTime} showTime={showTime} />
+            {tenzies ? <NewGame button={button} /> : <Roll button={button} />}
             <h2>Best result: {bestResult}</h2>
         </main>
     )

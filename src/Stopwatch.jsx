@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 export default function Stopwatch(props) {
-    const [time, setTime] = useState(0);
     const [running, setRunning] = useState(props.tenzies);
     const [bestTime, setBestTime] = useState(
-        JSON.parse(localStorage.getItem("bestTime")) || "none"
+        JSON.parse(localStorage.getItem("bestTime")) || Infinity
     )
 
     useEffect(() => {
@@ -12,8 +11,8 @@ export default function Stopwatch(props) {
             setRunning(true);
         } else if (props.tenzies === true) {
             setRunning(false);
-            if ((time > 0 || bestTime === "none") && time < bestTime) {
-                setBestTime(time);
+            if (props.time < bestTime && props.time > 0) {
+                setBestTime(props.time);
             }
         } else {
             setRunning(false);
@@ -23,12 +22,10 @@ export default function Stopwatch(props) {
     useEffect(() => {
         let interval;
         if (running) {
-            interval = setInterval(() => {
-                setTime((prevTime) => prevTime + 10);
-            }, 10)
+            interval = setInterval(() => props.runTime(), 10);
         } else if (!running) {
             clearInterval(interval);
-            setTime(0);
+            props.showTime();
         }
         return () => clearInterval(interval);
     }, [running]);
@@ -40,17 +37,21 @@ export default function Stopwatch(props) {
     return (
         <div className="stopwatch-container">
             <div className="stopwatch">
-                <span>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
-                <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}:</span>
-                <span>{("0" + ((time / 10) % 100)).slice(-2)}</span>
+                <span>{("0" + Math.floor((props.time / 60000) % 60)).slice(-2)}:</span>
+                <span>{("0" + Math.floor((props.time / 1000) % 60)).slice(-2)}:</span>
+                <span>{("0" + ((props.time / 10) % 100)).slice(-2)}</span>
             </div>
 
             <p>Best time:
-                 <span className="span-gap">
-                    <span>{("0" + Math.floor((bestTime / 60000) % 60)).slice(-2)}:</span>
-                    <span>{("0" + Math.floor((bestTime / 1000) % 60)).slice(-2)}:</span>
-                    <span>{("0" + ((bestTime / 10) % 100)).slice(-2)}</span>
-                </span>
+                {bestTime === Infinity ?
+                    <span className="span-gap">not played yet</span>
+                    :
+                    <span className="span-gap">
+                        <span>{("0" + Math.floor((bestTime / 60000) % 60)).slice(-2)}:</span>
+                        <span>{("0" + Math.floor((bestTime / 1000) % 60)).slice(-2)}:</span>
+                        <span>{("0" + ((bestTime / 10) % 100)).slice(-2)}</span>
+                    </span>
+                }
             </p>
         </div>
     )
