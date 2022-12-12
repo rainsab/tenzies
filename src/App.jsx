@@ -80,7 +80,7 @@ export default function App() {
                 {diceElements}
             </div>
             <h1>Rolls counter: {clicks}</h1>
-            <Stopwatch tenzies={tenzies} />
+            <Stopwatch tenzies={tenzies} dice={dice} />
             <button className="roll-dice" onClick={button}>
                 {tenzies ? "New Game" : "Roll"}
             </button>

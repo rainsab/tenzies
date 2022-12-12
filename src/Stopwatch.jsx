@@ -9,7 +9,10 @@ export default function Stopwatch(props) {
     const [lastTime, setLastTime] = useState("none")
 
     useEffect(() => {
-        if (props.tenzies === false) {
+        const isOneHeld = props.dice.some(die => die.isHeld);
+        if (props.tenzies === false && !isOneHeld) {
+            setRunning(false);
+        } else if (props.tenzies === false) {
             setRunning(true);
         } else if (props.tenzies === true) {
             setRunning(false);
