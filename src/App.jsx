@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { nanoid } from "nanoid";
-import Die from "./Die";
-import Stopwatch from './Stopwatch';
-import Roll from './Roll';
-import NewGame from './NewGame';
+import Die from "./components/Die";
+import Stopwatch from './components/Stopwatch';
+import Roll from './components/Roll';
+import NewGame from './components/NewGame';
 
 export default function App() {
     const [clicks, setClicks] = useState(0);
