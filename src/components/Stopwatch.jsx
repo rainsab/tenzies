@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 export default function Stopwatch(props) {
-    const [running, setRunning] = useState(false);
+    
     const [bestTime, setBestTime] = useState(
         JSON.parse(localStorage.getItem("bestTime")) || Infinity
     )
@@ -17,10 +17,9 @@ export default function Stopwatch(props) {
 
     useEffect(() => {
         if (props.tenzies === false) {
-            setRunning(true);
+            
             setTime(0);
         } else {
-            setRunning(false);
             if (time < bestTime && time > 0) {
                 setBestTime(time);
             }
@@ -29,14 +28,14 @@ export default function Stopwatch(props) {
 
     useEffect(() => {
         let interval;
-        if (running) {
+        if (!props.tenzies) {
             interval = setInterval(() => runTime(), 10);
-        } else if (!running) {
+        } else if (props.tenzies) {
             clearInterval(interval);
             showTime();
         }
         return () => clearInterval(interval);
-    }, [running]);
+    }, [props.tenzies]);
 
     useEffect(() => {
         localStorage.setItem("bestTime", JSON.stringify(bestTime));
