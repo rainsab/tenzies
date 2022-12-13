@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { nanoid } from "nanoid";
 import Die from "./components/Die";
 import Stopwatch from './components/Stopwatch';
-import Roll from './components/Roll';
-import NewGame from './components/NewGame';
 
 export default function App() {
     const [clicks, setClicks] = useState(0);
@@ -95,7 +93,9 @@ export default function App() {
             <div className="dice-container">
                 {diceElements}
             </div>
-            {tenzies ? <NewGame onButtonClick={button} /> : <Roll onButtonClick={button} />}
+            <button className="button" onClick={button}>
+                {tenzies ? "New Game" : "Roll"}
+            </button>
             <Stopwatch tenzies={tenzies} dice={dice} />
             <div className="text-center">
                 <p>Rolls counter: {clicks}</p>
