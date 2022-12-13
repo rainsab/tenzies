@@ -37,15 +37,7 @@ export default function App() {
 
     const [dice, setDice] = useState(firstDice());
     const [tenzies, setTenzies] = useState(false);
-    const [time, setTime] = useState(0);
-
-    const runTime = () => {
-        setTime((prevTime) => prevTime + 10);
-    }
-
-    const showTime = () => {
-        setTime(time);
-    }
+    
 
     useEffect(() => {
         const allHeld = dice.every(die => die.isHeld);
@@ -81,7 +73,6 @@ export default function App() {
             setTenzies(false);
             setClicks(0);
             setDice(newDiceGrid());
-            setTime(0);
         }
     }
 
@@ -104,8 +95,8 @@ export default function App() {
             <div className="dice-container">
                 {diceElements}
             </div>
-            {tenzies ? <NewGame button={button} /> : <Roll button={button} />}
-            <Stopwatch tenzies={tenzies} dice={dice} time={time} runTime={runTime} showTime={showTime} />
+            {tenzies ? <NewGame onButtonClick={button} /> : <Roll onButtonClick={button} />}
+            <Stopwatch tenzies={tenzies} dice={dice} />
             <div className="text-center">
                 <p>Rolls counter: {clicks}</p>
                 <p>Best result: {bestResult}</p>
