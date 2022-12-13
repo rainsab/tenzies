@@ -1,45 +1,31 @@
 import React, { useState, useEffect } from "react";
 
 export default function Stopwatch(props) {
-    
+    const [time, setTime] = useState(0);
     const [bestTime, setBestTime] = useState(
         JSON.parse(localStorage.getItem("bestTime")) || Infinity
     )
-    const [time, setTime] = useState(0);
-
-    const runTime = () => {
-        setTime((prevTime) => prevTime + 10);
-    }
-
-    const showTime = () => {
-        setTime(time);
-    }
-
+    
     useEffect(() => {
-        if (props.tenzies === false) {
-            
-            setTime(0);
-        } else {
-            if (time < bestTime && time > 0) {
-                setBestTime(time);
-            }
-        }
-    }, [props.tenzies]);
+        localStorage.setItem("bestTime", JSON.stringify(bestTime));
+    }, [bestTime]);
 
     useEffect(() => {
         let interval;
         if (!props.tenzies) {
-            interval = setInterval(() => runTime(), 10);
+            setTime(0);
+            interval = setInterval(() => {
+                setTime((prevTime) => prevTime + 10);
+            }, 10)
         } else if (props.tenzies) {
             clearInterval(interval);
-            showTime();
+            setTime(time);
+            if (time < bestTime && time > 0) {
+                setBestTime(time);
+            }
         }
         return () => clearInterval(interval);
     }, [props.tenzies]);
-
-    useEffect(() => {
-        localStorage.setItem("bestTime", JSON.stringify(bestTime));
-    }, [bestTime]);
 
     return (
         <div className="text-center">
