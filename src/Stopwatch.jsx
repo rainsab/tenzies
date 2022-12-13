@@ -35,7 +35,7 @@ export default function Stopwatch(props) {
     }, [bestTime]);
 
     return (
-        <div className="stopwatch-container">
+        <div className="text-center">
             <div className="stopwatch">
                 <span>{("0" + Math.floor((props.time / 60000) % 60)).slice(-2)}:</span>
                 <span>{("0" + Math.floor((props.time / 1000) % 60)).slice(-2)}.</span>

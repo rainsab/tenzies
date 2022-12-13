@@ -7,11 +7,16 @@ body {
   background-color: #0B2434;
   padding: 1.25rem;
   font-family: 'Karla', sans-serif;
+  font-weight: bold;
+}
+
+h1 {
+  margin: 0;
 }
 
 p {
-  font-weight: bold;
   letter-spacing: 0.008em;
+  margin: 0;
 }
 
 main {
@@ -49,7 +54,7 @@ main {
   font-size: 4rem;
 }
 
-.roll-dice {
+.button {
   width: 150px;
   padding: 1rem;
   border: none;
@@ -60,15 +65,15 @@ main {
   font-family: 'Karla', sans-serif;
 }
 
-.roll-dice:focus {
+.button:focus {
   outline: none;
 }
 
-.roll-dice:active {
+.button:active {
   box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
 }
 
-.stopwatch-container {
+.text-center {
   text-align: center;
 }
 

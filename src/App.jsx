@@ -99,14 +99,17 @@ export default function App() {
 
     return (
         <main>
+            <h1>Tenzies Game</h1>
             <p>Roll or hold by clicking on dice till you get all same</p>
             <div className="dice-container">
                 {diceElements}
             </div>
-            <h1>Rolls counter: {clicks}</h1>
-            <Stopwatch tenzies={tenzies} dice={dice} time={time} runTime={runTime} showTime={showTime} />
             {tenzies ? <NewGame button={button} /> : <Roll button={button} />}
-            <h2>Best result: {bestResult}</h2>
+            <Stopwatch tenzies={tenzies} dice={dice} time={time} runTime={runTime} showTime={showTime} />
+            <div className="text-center">
+                <p>Rolls counter: {clicks}</p>
+                <p>Best result: {bestResult}</p>
+            </div>
         </main>
     )
 }
