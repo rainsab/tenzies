@@ -38,8 +38,8 @@ main {
 }
 
 .die-ui {
-  height: 100px;
-  width: 100px;
+  height: 6.5rem;
+  width: 6.5rem;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
   display: flex;
@@ -55,10 +55,10 @@ main {
 }
 
 .button {
-  width: 150px;
+  width: 9.25rem;
   padding: 1rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   background-color: #5035FF;
   color: white;
   font-size: 1.2rem;
