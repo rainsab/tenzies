@@ -46,7 +46,7 @@ main {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  background-color: white;
+  user-select: none;
   padding: 1rem;
 }
 
